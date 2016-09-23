@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.util.Scanner;
 
-public class MaruParser {
+public class MaruParser001 {
 	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("접속할 주소명을 입력하세요 : "); String address = sc.next();
