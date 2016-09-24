@@ -5,6 +5,7 @@
  * 확장자 jpg, jpeg, png, gif, bmp 지원
  * Http response code 확인 기능 추가
  * 기본 다운로드 위치 c:/Comics/ 로 변경
+ * 다운로드 시작 시 다운로드 경로 출력
  * @author occidere
  */
 package Parsing;
@@ -43,7 +44,7 @@ public class MaruParser {
 		//스르림 읽어옴
 		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 		
-		String line, title = "", type=""; //type = 확장자
+		String line, title = "", type="", path=""; //type = 확장자, path = 저장 경로
 		boolean titlePrint = false; //타이틀 1번만 출력하기 위한 boolean 값
 		while ((line = in.readLine()) != null) {
 			//System.out.println(line);
@@ -52,6 +53,11 @@ public class MaruParser {
 			if(!titlePrint && line.contains("entry-title")){
 				title = line.replace("<h1 class=\"entry-title\">", "").replace("</h1>", "");
 				System.out.println("제목 : "+ title);
+				//위에서 저장한 제목으로 폴더 생성
+				path = "c:/Comics/"+title;
+				File d = new File(path);
+				d.mkdirs();
+				System.out.println("저장 경로 : "+ path);
 				titlePrint = true;
 				continue;
 			}
@@ -89,12 +95,8 @@ public class MaruParser {
 						getImg.setRequestProperty("User-Agent", "Mozilla/5.0");
 						BufferedImage img = ImageIO.read(getImg.getInputStream());
 						
-						//위에서 저장한 제목으로 폴더 생성
-						File d = new File("c:/Comics/"+title);
-						d.mkdirs();
-						
 						//페이지 번호가 10보다 작으면 01.jpg이런식, 10이상이면 11.jpg 이런식
-						File f = new File("c:/Comics/"+title+"/"+(j+1<10?"0"+(j+1):j+1)+".jpg");
+						File f = new File(path+"/"+(j+1<10?"0"+(j+1):j+1)+".jpg");
 						ImageIO.write(img, "jpg", f);
 						
 						System.out.println(page[j]+"......... ok!");
