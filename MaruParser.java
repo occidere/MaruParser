@@ -11,6 +11,7 @@
  * 만화 제목에 ? 등이 포함시 폴더 생성에서 에러가 나는 문제 해결
  * 불필요한 변수사용 제거 및 가독성을 위한 변수명 변경
  * 저장시 본래의 확장자가 아니라 jpg로 강제 저장되는 문제 해결
+ * 폴더명 생성규칙에 위배되는 특수문자 제거방식을 정규식 이용 코드로 대체해 폭넓게 대처 가능
  * @author occidere
  */
 package Parsing;
@@ -79,10 +80,8 @@ public class MaruParser {
 			if(!titlePrint && line.contains("entry-title")){
 				title = line.replace("<h1 class=\"entry-title\">", "").replace("</h1>", "");
 				
-				//만화 제목에 ?, !, ~가 포함되있을 경우 폴더 생성이 안되므로 제거
-				if(title.contains("?")||title.contains("!")||title.contains("~")){
-					title = title.replace("?", "").replace("!", "").replace("~", "");
-				}
+				//만화 제목에 폴더생성규칙에 위배되는 특수문자가 포함되있을 경우 제거
+				title = title.replaceAll("[^[:alnum:]+]", "");
 				System.out.println("제목 : "+ title);
 				
 				//위에서 저장한 제목으로 폴더 생성
