@@ -4,6 +4,10 @@ marumaruin parser using Java
 json이나 xml 파서를 이용한 파싱이 아닌 순수하게 자바에 내장된 HTTP, URL, ImageIO기능을 활용해 파싱 후 저장하는 방식입니다.
 
 
+-- ver 0.1.2 --
+다운로드 주소가 archives의 주소가 아닌 업데이트 알림 페이지 등에서 받아온 주소인 경우도 다운로드 가능하게 수정
+
+
 -- ver 0.1.1 --
 다운로드 시작 시 저장 경로 출력
 
