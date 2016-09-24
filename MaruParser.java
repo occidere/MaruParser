@@ -6,6 +6,7 @@
  * Http response code 확인 기능 추가
  * 기본 다운로드 위치 c:/Comics/ 로 변경
  * 다운로드 시작 시 다운로드 경로 출력
+ * 다운로드 주소가 archives의 주소가 아닌 업데이트 알림 페이지 등에서 받아온 주소인 경우도 다운로드 가능
  * @author occidere
  */
 package Parsing;
@@ -24,6 +25,29 @@ public class MaruParser {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("접속할 주소명을 입력하세요 : "); String address = sc.next();
 		
+		//만약 입력한 주소가 archives주소가 아닌 업데이트 란에 올라온 주소 둥일 경우
+		if(address.contains("marumaru")||address.contains("manga")){
+			HttpURLConnection conn = (HttpURLConnection) new URL(address).openConnection();
+			conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+			//스르림 읽어옴
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+			String findTitle;
+			while((findTitle = in.readLine())!=null){
+				if(findTitle.contains("/archives/") && findTitle.contains("http")){
+					findTitle = findTitle.replace("href=\"", "@").replace("\" target", "#");
+					int length = findTitle.length();
+					address = "";
+					for(int i=0;i<length;i++)
+						if(findTitle.charAt(i)=='@'){
+							while(findTitle.charAt(i)!='#')	address+=findTitle.charAt(i++);
+							break;
+						}
+					address = address.replace("@", "");
+					break;
+				}
+			}//주소 추출 과정 while문 종료
+		}//만화 업데이트나 텍스트 부분 처럼 직접 보러 들어가지 않은 상태의 주소를 넣었을때 archives 주소 추출 if문 종료
+				
 		//인터넷 연결 부분
 		HttpURLConnection conn = (HttpURLConnection) new URL(address).openConnection();
 		conn.setRequestProperty("User-Agent", "Mozilla/5.0");
