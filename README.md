@@ -3,6 +3,11 @@ marumaruin parser using Java
 만화 이미지 파일을 다운로드 해주는 코드입니다.
 json이나 xml 파서를 이용한 파싱이 아닌 순수하게 자바에 내장된 HTTP, URL, ImageIO기능을 활용해 파싱 후 저장하는 방식입니다.
 
+-- ver 0.1.5 --
+ * responseCode체크 부분을 responseCheck()라는 메소드로 분리
+ * HttpURLConnection 부분 connection()메소드로 분리
+ * address를 String 타입에서 StringBuider로 변경하여 주소연산시간 단축
+
 -- ver 0.1.4 --
  * 속도향상(이미지 url주소 추출하는 while, for문 인덱스 값 수정하여 불필요한 replace() 함수 사용 배제 및 반복횟수 감소)
  * ImageIO()함수 내에서 확장자 부분을 replace()함수 대신 substring() 사용해 시간 단축
