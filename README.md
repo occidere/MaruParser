@@ -1,4 +1,4 @@
-# parsing-MaruParser
+# MaruParser
 marumaruin parser using Java
 만화 이미지 파일을 다운로드 해주는 코드입니다.
 json이나 xml 파서를 이용한 파싱이 아닌 순수하게 자바에 내장된 HTTP, URL, ImageIO기능을 활용해 파싱 후 저장하는 방식입니다.
