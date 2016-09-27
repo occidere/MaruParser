@@ -3,6 +3,14 @@ marumaruin parser using Java
 만화 이미지 파일을 다운로드 해주는 코드입니다.
 json이나 xml 파서를 이용한 파싱이 아닌 순수하게 자바에 내장된 HTTP, URL, ImageIO기능을 활용해 파싱 후 저장하는 방식입니다.
 
+-- ver 0.2.0 --
+ * 이미지 url을 받아오는 부분을 jsoup 이용
+ * archive주소 걸러주는 checkAddress()메소드 생성
+ * 전체 파일 개수 출력
+ * responseCode()관련 출력, 메소드 삭제
+ * 다운로드 파일 출력 형식 변경 (현재 / 전체 ... ok!)
+ * 이미지 url에 한글이 있으면 exe파일에선 저장 불가(이클립스에선 가능)
+
 -- ver 0.1.5 --
  * responseCode체크 부분을 responseCheck()라는 메소드로 분리
  * HttpURLConnection 부분 connection()메소드로 분리
