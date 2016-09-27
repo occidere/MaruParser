@@ -23,6 +23,7 @@
  * responseCode()관련 출력, 메소드 삭제
  * 다운로드 파일 출력 형식 변경 (현재 / 전체 ... ok!)
  * 이미지 url에 한글이 있으면 exe파일에선 저장 불가(이클립스에선 가능)
+ * 제목 특수문자 제거부분 수정
  * @author occidere
  */
 package Parsing;
@@ -54,7 +55,9 @@ public class MaruParser {
 		}
 		
 		Document doc = Jsoup.connect(address.toString()).userAgent("Mozilla/5.0").timeout(5000).get();
-		title = doc.select("header.entry-header").text();
+		
+		//제목 특수문자 제거
+		title = doc.select("header.entry-header").text().replaceAll("[^[:alnum:]+]", "");
 		path = "c:/Comics/" + title;
 		System.out.println("저장 경로 : " + path);
 		new File(path).mkdirs();
