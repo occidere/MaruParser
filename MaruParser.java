@@ -67,7 +67,7 @@ public class MaruParser {
 		}
 		
 		// 만약 전체 권을 모아놓은 주소 넣었다면 각 회차의 주소 및 archives 주소 추출 후 foreach문으로 다운로드 진행
-		else if(address.toString().contains("manga")) {
+		else if(address.toString().contains("marumaru")) {
 			Document doc = Jsoup.connect(address.toString()).userAgent("Mozilla/5.0").timeout(10000).get();
 			//부모폴더 지정
 			parentFolder = doc.getElementsByTag("h1").text();
