@@ -28,6 +28,7 @@
  * [중요]<a href="">로 다운로드 불가능하던 부분 data-src 태그 탐색으로 문제 해결
  * [중요]만화 전권 다운로드 가능
  * 페이지 번호에 0 또는 00을 붙여 3자리수까지 오름차순 네이밍 유지 가능하게 함
+ * [중요]확장자 대소문자 상관없이 모두 다운로드 가능하게 함
  * @author occidere
  */
 package Parsing;
@@ -120,11 +121,10 @@ public class MaruParser {
 		new File(path).mkdirs();
 		System.out.println("제목 : "+title);
 
-		//정규식 이용해서 data-src의 어트리뷰트 내용 중 이미지 확장자로 끝나는 부분의 주소만 불러옴
-		Elements imgUrl = doc.select("[data-src~=(jpe?g|gif|png|bmp)]");
+		//정규식 이용해서 data-src의 어트리뷰트 내용 중 이미지 확장자로 끝나는 부분의 주소만 불러옴. 확장자 대소문자 상관없이 다 되게 수정
+		Elements imgUrl = doc.select("[data-src~=(?i)(jpe?g|gif|png|bmp)]");
 		total = imgUrl.size();
 		System.out.println("전체 파일 개수 : "+total+"개");
-
 		//확장자 판단
 		if (imgUrl.toString().contains("jpg")) extension = "jpg";
 		else if (imgUrl.toString().contains("jpeg")) extension = "jpeg";
