@@ -3,6 +3,9 @@ marumaruin parser using Java
 만화 이미지 파일을 다운로드 해주는 코드입니다.
 json이나 xml 파서를 이용한 파싱이 아닌 순수하게 자바에 내장된 HTTP, URL, ImageIO기능과 jsoup을 활용해 파싱 후 저장하는 방식입니다.
 
+--- 프로젝트 이전 공지 ---
+* 해당 프로젝트는 MMDownloader(https://github.com/occidere/MMDownloader)로 이전
+
 -- 사용 불가 --
 * 현재 다시 자바스크립트를 이용해 페이지 로드하는 방식으로 바뀜
 * 동적 페이지 크롤링 방법을 적용해야됨
